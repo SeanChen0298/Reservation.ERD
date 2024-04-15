@@ -1,19 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Reservation.ERD.Appspace.Data;
-using Reservation.ERD.Appspace.Model;
+using Reservation.ERD.Data;
+using Reservation.ERD.Model;
+using Reservation.ERD.Service;
 
-namespace Reservation.ERD.Appspace.Controllers
+namespace Reservation.ERD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class EventsController : ControllerBase
     {
         private readonly ReservationContext _context;
+        private readonly EventService eventService;
 
-        public EventsController(ReservationContext context)
+        public EventsController(ReservationContext context, EventService eventService)
         {
             _context = context;
+            eventService = eventService;
         }
 
         // GET: api/Events
@@ -49,6 +52,19 @@ namespace Reservation.ERD.Appspace.Controllers
                 return BadRequest();
             }
 
+            var currentUtc = DateTime.UtcNow;
+            var existingEvents = await _context.Events
+                                .Where(e => e.EndAt >= currentUtc)
+                                .ToListAsync();
+
+            foreach ( var existingEvent in existingEvents )
+            {
+                if(eventService.CheckOverlap(existingEvent, @event))
+                {
+                    return Forbid();
+                }
+            }
+
             _context.Entry(@event).State = EntityState.Modified;
 
             try
@@ -75,6 +91,19 @@ namespace Reservation.ERD.Appspace.Controllers
         [HttpPost]
         public async Task<ActionResult<Event>> PostEvent(Event @event)
         {
+            var currentUtc = DateTime.UtcNow;
+            var existingEvents = await _context.Events
+                                .Where(e => e.EndAt >= currentUtc)
+                                .ToListAsync();
+
+            foreach (var existingEvent in existingEvents)
+            {
+                if (eventService.CheckOverlap(existingEvent, @event))
+                {
+                    return Forbid();
+                }
+            }
+
             _context.Events.Add(@event);
             await _context.SaveChangesAsync();
 

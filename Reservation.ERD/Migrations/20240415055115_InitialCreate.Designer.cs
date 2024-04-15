@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Reservation.ERD.Appspace.Data;
+using Reservation.ERD.Data;
 
 #nullable disable
 
-namespace Reservation.ERD.Appspace.Migrations
+namespace Reservation.ERD.Migrations
 {
     [DbContext(typeof(ReservationContext))]
     [Migration("20240415055115_InitialCreate")]
@@ -20,7 +20,7 @@ namespace Reservation.ERD.Appspace.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.Event", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.Event", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,7 +41,7 @@ namespace Reservation.ERD.Appspace.Migrations
                     b.ToTable("Event", (string)null);
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.Resource", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.Resource", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace Reservation.ERD.Appspace.Migrations
                     b.ToTable("Resource", (string)null);
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.ResourceEvent", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.ResourceEvent", b =>
                 {
                     b.Property<Guid>("ResourceEventId")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace Reservation.ERD.Appspace.Migrations
                     b.ToTable("ResourceEvent", (string)null);
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.ResourceEventAttendee", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.ResourceEventAttendee", b =>
                 {
                     b.Property<Guid>("ResourceEventAttendeeId")
                         .ValueGeneratedOnAdd()
@@ -105,41 +105,41 @@ namespace Reservation.ERD.Appspace.Migrations
                     b.ToTable("ResourceEventAttendee", (string)null);
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.ResourceEvent", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.ResourceEvent", b =>
                 {
-                    b.HasOne("Reservation.ERD.Appspace.Model.Event", null)
+                    b.HasOne("Reservation.ERD.Model.Event", null)
                         .WithMany("ResourceEvents")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reservation.ERD.Appspace.Model.Resource", null)
+                    b.HasOne("Reservation.ERD.Model.Resource", null)
                         .WithMany("ResourceEvents")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.ResourceEventAttendee", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.ResourceEventAttendee", b =>
                 {
-                    b.HasOne("Reservation.ERD.Appspace.Model.ResourceEvent", null)
+                    b.HasOne("Reservation.ERD.Model.ResourceEvent", null)
                         .WithMany("ResourceEventAttendees")
                         .HasForeignKey("ResourceEventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.Event", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.Event", b =>
                 {
                     b.Navigation("ResourceEvents");
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.Resource", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.Resource", b =>
                 {
                     b.Navigation("ResourceEvents");
                 });
 
-            modelBuilder.Entity("Reservation.ERD.Appspace.Model.ResourceEvent", b =>
+            modelBuilder.Entity("Reservation.ERD.Model.ResourceEvent", b =>
                 {
                     b.Navigation("ResourceEventAttendees");
                 });

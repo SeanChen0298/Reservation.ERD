@@ -1,4 +1,4 @@
-namespace Reservation.ERD.Appspace
+namespace Reservation.ERD
 {
     public class WeatherForecast
     {

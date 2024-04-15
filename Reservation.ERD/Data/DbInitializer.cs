@@ -1,6 +1,6 @@
-﻿using Reservation.ERD.Appspace.Model;
+﻿using Reservation.ERD.Model;
 
-namespace Reservation.ERD.Appspace.Data
+namespace Reservation.ERD.Data
 {
     public static class DbInitializer
     {

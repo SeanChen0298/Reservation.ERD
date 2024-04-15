@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Reservation.ERD.Appspace.Controllers
+namespace Reservation.ERD.Controllers
 {
     [ApiController]
     [Route("[controller]")]

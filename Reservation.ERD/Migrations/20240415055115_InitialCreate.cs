@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Reservation.ERD.Appspace.Migrations
+namespace Reservation.ERD.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

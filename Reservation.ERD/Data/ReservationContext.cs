@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Reservation.ERD.Appspace.Model;
+using Reservation.ERD.Model;
 
-namespace Reservation.ERD.Appspace.Data
+namespace Reservation.ERD.Data
 {
     public class ReservationContext : DbContext
     {

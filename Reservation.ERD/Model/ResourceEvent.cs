@@ -1,4 +1,4 @@
-﻿namespace Reservation.ERD.Appspace.Model
+﻿namespace Reservation.ERD.Model
 {
     public class ResourceEvent
     {
