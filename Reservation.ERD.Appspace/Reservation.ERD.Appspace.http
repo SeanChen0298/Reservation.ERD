@@ -1,0 +1,6 @@
+@Reservation.ERD.Appspace_HostAddress = http://localhost:5236
+
+GET {{Reservation.ERD.Appspace_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
